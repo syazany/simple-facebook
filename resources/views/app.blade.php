@@ -27,6 +27,7 @@
 <body class="antialiased">
 <div  id="app" class="relative flex items-top justify-center min-h-screen sm:items-center ">
     <main>
+        <toast-notification></toast-notification>
         <div class="pt-16 flex">
             <router-view :key="$route.fullPath"></router-view>
         </div>

@@ -6,9 +6,10 @@ import VueRouter from 'vue-router'
 
 import {routes} from "./routes/routes";
 import Vuex from 'vuex'
+import VueToast from "vue-toast-notification";
 import notification from "./vuex-modules/notification";
 
-Vue.use(Vuex)
+[VueRouter, Vuex, VueToast].forEach((x) => Vue.use(x));
 
 window.axios = require('axios');
 
@@ -24,8 +25,6 @@ axios.interceptors.response.use(
         throw err;
     }
 );
-
-Vue.use(VueRouter)
 
 const files = require.context("./", true, /\.vue$/i);
 files.keys().map(key =>

@@ -4,9 +4,9 @@
 
         </div>
         <div class="flex justify-center my-2 mx-4 md:mx-0">
-            <form method="POST" :action="action" class="w-full max-w-md bg-white rounded-lg shadow-md p-6">
+            <form class="w-full max-w-md bg-white rounded-lg shadow-md p-6">
                 <h2 class="text-2xl font-medium tracking-tight pb-4">
-                    Sign in to your account
+                    Create New Account
                 </h2>
                 <div class="flex flex-wrap -mx-3 mb-6">
                     <div class="w-full md:w-full px-3 mb-6">
@@ -40,6 +40,7 @@
                     </div>
                     <div class="w-full md:w-full px-3 mb-6">
                         <button
+                         @click="registerUser"
                          :disabled="invalidPassword"
                          :class="{
                              'bg-blue-500' : invalidPassword,
@@ -72,16 +73,27 @@ export default {
             return !(this.confirmPassword.length && this.password.length && this.confirmPassword === this.password);
         },
     },
-    methods : {
-        async register() {
+    methods: {
+        async registerUser() {
 
-            const response = axios.post('/api/register', {
-                email : this.email,
-                password : this.password,
-                password_confirmation : this.confirmPassword
-            });
+            try {
+                const response = await axios.post('/api/register', {
+                    email: this.email,
+                    password: this.password,
+                    password_confirmation: this.confirmPassword
+                });
 
-            console.log({response});
+                this.$store.commit("notification/showNotification", {
+                    message : "Registration successful please login using your credentials"
+                })
+
+                console.log({response});
+
+                await this.$router.push({name: 'login'});
+
+            } catch (e) {
+                this.$store.commit("notification/showNotification", e.response.data.message);
+            }
 
 
         }
