@@ -26,7 +26,11 @@
 </head>
 <body class="antialiased">
 <div  id="app" class="relative flex items-top justify-center min-h-screen sm:items-center ">
-
+    <main>
+        <div class="pt-16 flex">
+            <router-view :key="$route.fullPath"></router-view>
+        </div>
+    </main>
 </div>
 </body>
 <script src="{{ asset('js/app.js')}}" type="text/javascript"></script>
