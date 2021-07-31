@@ -4,7 +4,7 @@
 
         </div>
         <div class="flex justify-center my-2 mx-4 md:mx-0">
-            <form class="w-full max-w-md bg-white rounded-lg shadow-md p-6">
+            <div class="w-full max-w-md bg-white rounded-lg shadow-md p-6">
                 <h2 class="text-2xl font-medium tracking-tight pb-4">
                     Create New Account
                 </h2>
@@ -51,7 +51,7 @@
                         </button>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </template>
@@ -89,10 +89,11 @@ export default {
 
                 console.log({response});
 
-                await this.$router.push({name: 'login'});
+                this.$router.push({name: 'login'});
 
             } catch (e) {
-                this.$store.commit("notification/showNotification", e.response.data.message);
+                console.log({e});
+                this.$store.commit("notification/showNotification", {message : e.response.data.message, variant : "error"});
             }
 
 

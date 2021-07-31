@@ -4,27 +4,30 @@ require('./bootstrap');
 
 import VueRouter from 'vue-router'
 
+require('alpinejs');
+
 import {routes} from "./routes/routes";
 import Vuex from 'vuex'
 import VueToast from "vue-toast-notification";
 import notification from "./vuex-modules/notification";
+import posts from "./vuex-modules/posts";
 
 [VueRouter, Vuex, VueToast].forEach((x) => Vue.use(x));
 
 window.axios = require('axios');
 
-axios.interceptors.response.use(
-    res => {
-        return res;
-    },
-    err => {
-        if (err.response.status === 401) {
-            location.replace('/login');
-        }
-
-        throw err;
-    }
-);
+// axios.interceptors.response.use(
+//     res => {
+//         return res;
+//     },
+//     err => {
+//         if (err.response.status === 401) {
+//             location.replace('/login');
+//         }
+//
+//         throw err;
+//     }
+// );
 
 const files = require.context("./", true, /\.vue$/i);
 files.keys().map(key =>
@@ -40,6 +43,7 @@ files.keys().map(key =>
 export const store = new Vuex.Store({
     modules: {
         notification,
+        posts
     }
 });
 
