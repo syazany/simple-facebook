@@ -16,13 +16,14 @@
                 <a @click="showCommentTextField = !showCommentTextField" href="#"
                    class="text-blue-500 hover:underline">Add comments ({{post.comments.length}} comments)</a>
                 <button
+                 @click="likePost"
                  class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
                          viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                               d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
                     </svg>
-                    <span>Like</span>
+                    <span>{{liked ? 'Liked' : 'Like'}} ({{post.likes_count}})</span>
                 </button>
             </div>
 
@@ -78,6 +79,7 @@
 import commentRepository from "../../repositories/commentRepository";
 import {mapActions} from "vuex";
 import PostPopover from "../../components/posts/PostPopover";
+import likeRepository from "../../repositories/likeRepository";
 
 export default {
     name: "Post",
@@ -93,16 +95,22 @@ export default {
             comment: ""
         }
     },
+    computed : {
+        liked() {
+            return this.post.liked_by_user;
+        }
+    },
     methods: {
         ...mapActions({
             fetchPosts: "posts/fetchPosts"
         }),
         async postComment() {
-            const response = await commentRepository.store(this.post.id, {
+            await commentRepository.store(this.post.id, {
                 content: this.comment
             })
 
             await this.fetchPosts();
+
             this.$store.commit("notification/showNotification", {
                 message : "Comment added"
             })
@@ -110,7 +118,11 @@ export default {
         },
         deleteComment(id) {
 
-        }
+        },
+        async likePost() {
+            this.liked ? await likeRepository.delete(this.post.id) :  await likeRepository.store(this.post.id);
+            await this.fetchPosts();
+        },
     }
 }
 </script>

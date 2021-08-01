@@ -1,5 +1,3 @@
-const resource = 'requirements'
-
 window.axios = require('axios');
 
 export default {
