@@ -15,4 +15,5 @@ Route::middleware('auth:api')->group(function() {
         'posts' => PostController::class
     ]);
 
+    Route::resource('posts.comments', \App\Http\Controllers\CommentController::class)->only(['index', 'store'])->shallow();
 });

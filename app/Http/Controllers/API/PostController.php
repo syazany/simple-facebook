@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\PostCreateRequest;
+use App\Http\Resources\Post\PostIndexResource;
 use App\Http\Resources\Post\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -12,12 +13,16 @@ class PostController extends Controller
 {
     public function index(Request $request)
     {
-        return PostResource::collection($request->user()->posts()->paginate());
+        return PostIndexResource::collection($request->user()
+            ->posts()
+            ->with(['user', 'likedByUser', 'comments.user'])
+            ->withCount(['likes'])
+            ->paginate());
     }
 
     public function store(PostCreateRequest $request)
     {
-        return new PostResource($request->user()->posts()->create([$request->validated()]));
+        return new PostResource($request->user()->posts()->create($request->validated()));
     }
 
    public function show(Post $post)

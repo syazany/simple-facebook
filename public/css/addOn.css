@@ -1,0 +1,271 @@
+
+/* BUTTON SECTION */
+.btn {
+    padding: 0.3rem 0.6rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+    align-items: center;
+    display: inline-flex;
+    border-radius: 0.25rem;
+}
+
+.btn-primary {
+    background-color: rgb(84, 105, 212);
+    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0.12) 0px 1px 1px 0px,
+    rgb(84, 105, 212) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
+    color: #fff;
+}
+
+.text-color-purple {
+    color : rgb(84, 105, 212);
+}
+
+.btn-icon {
+    padding-left : 0.3rem;
+}
+
+.btn-primary:hover {
+    background-color: #2b6cb0;
+}
+
+.btn-danger {
+    color : white;
+}
+
+.btn-secondary {
+    @apply bg-gray-300 text-gray-800
+}
+
+.btn-secondary:hover {
+    @apply bg-gray-400
+}
+
+.btn-disabled {
+    @apply opacity-50 cursor-not-allowed
+}
+
+.btn-tertiary {
+    @apply text-gray-800
+}
+
+.btn-tertiary:hover {
+    @apply bg-gray-400
+}
+
+.btn-dropdown {
+    @apply  border-transparent rounded border
+}
+
+.btn-dropdown:hover {
+    @apply bg-white border-gray-400
+}
+
+/* BUTTON ENDS */
+
+/* INPUT AND FORM */
+
+.primary-input {
+    @apply appearance-none hidden border block w-full bg-gray-100
+    text-gray-800 border rounded py-1 border-gray-400
+    px-4 py-2 leading-tight
+}
+
+.primary-input:focus {
+    @apply bg-white outline-none
+}
+
+.primary-input:hover {
+    @apply bg-gray-200
+}
+
+
+.primary-label {
+    @apply block tracking-wide text-black text-sm font-medium mb-2 pt-5 text-left
+}
+
+.primary-text-area {
+    @apply resize border rounded border leading-normal w-full h-24 py-2 px-3
+}
+
+.primary-text-area:focus {
+    @apply outline-none py-2
+}
+
+.primary-rich-text {
+    min-height : 200px;
+    @apply rounded
+}
+
+.description {
+    float: left;
+    width: 100%;
+    /*height: auto;*/
+}
+
+.text-input {
+    float: left;
+    width: 100%;
+    min-height: 75px;
+    border: 1px solid grey;
+}
+
+.text-input:focus {
+    @apply bg-white
+}
+
+.primary-select {
+    @apply bg-gray-100
+}
+
+.primary-select:focus {
+    @apply bg-white
+}
+
+/* INPUT AND FORM ENDS */
+
+.divider {
+    width:5px;
+    height:auto;
+    display:inline-block;
+}
+
+
+.primary-tabs {
+    font-size: 0.9rem;
+    border-radius: 0;
+    padding: 0.75rem 1.25rem;
+    color: #e2edf4;
+}
+
+.nav-pills .nav-link.active {
+    background: none;
+    color: #4040c8;
+    border-bottom: solid 2px #4040c8;
+}
+
+.nav-pills .nav-link:hover {
+    background: none;
+    border-bottom: solid 2px grey;
+}
+
+.nav-pills .nav-link {
+    font-size: 0.9rem;
+    border-radius: 0;
+    padding: 0.5rem 1.25rem;
+    color: #120f12;
+}
+
+.nav {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+.tab {
+    border-bottom-width: 3px;
+    @apply no-underline text-gray-700 border-transparent tracking-wide font-semibold py-3 mr-8
+}
+
+@screen sm {
+    .tab {
+        @apply text-lg
+    }
+}
+
+@screen md {
+    .tab {
+        font-size: 1.125rem;
+    }
+}
+
+@screen lg {
+    .tab {
+        font-size: 0.875rem;
+    }
+}
+
+.active-tab {
+    @apply text-purple-700 border-purple-700
+}
+
+.tab:hover {
+    @apply border-gray-500
+}
+
+.search-textfield {
+    @apply hidden px-4 py-1 text-sm text-gray-600 border-2 rounded block
+}
+
+.search-textfield:focus {
+    @apply outline-none shadow-none
+}
+
+.search-textfield:hover {
+    @apply bg-gray-100
+}
+
+h1 {
+    @apply text-2xl py-4 border-b font-bold border-none
+}
+
+/* table */
+.default-row {
+    @apply border-solid border-t border-gray-200
+}
+
+.default-header {
+    @apply bg-gray-100 sticky top-0 border-b border-gray-200 px-6 py-2 text-gray-600 font-bold tracking-wider uppercase text-xs
+}
+
+/*TODO : set rounded rich text area by uncomment border-radius*/
+.ql-container.ql-snow {
+    border: none;
+    /*border-radius: 5px;*/
+    height: 150px;
+}
+
+.default-dialog-title {
+    @apply font-medium px-4
+}
+
+/* dialog */
+.default-dialog-size {
+    /*@apply sm:w-full md:w-1/4*/
+}
+
+.modal-button-alignment {
+    @apply inline-flex text-right pt-5 pb-2 float-right
+}
+
+.contextual-popover-content {
+    right: 20px;
+    position : absolute;
+    /*margin-top : 0.5rem;*/
+    width : 14rem;
+    background-color: white;
+    --bg-opacity: 1;
+    border-radius : 0.375rem;
+    z-index : 20;
+    box-shadow : 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.error-message {
+    color: #f56565;
+    font-size: 0.875rem;
+}
+
+/* transition */
+
+
+
+
+

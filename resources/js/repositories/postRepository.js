@@ -6,8 +6,8 @@ export default {
     all() {
         return axios.get(`/api/posts`);
     },
-    store(id, payload) {
-        return axios.post(`/api/${id}`, payload)
+    store(payload) {
+        return axios.post(`/api/posts`, payload)
     },
     get(id) {
         return axios.post(`/api/${id}`);
