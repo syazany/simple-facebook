@@ -30,7 +30,7 @@
         </modal>
 
         <delete-confirmation-dialog object-type="Post"
-                                    @delete="deletePost"></delete-confirmation-dialog>
+                                    @delete="postDelete"></delete-confirmation-dialog>
 
         <div class="px-6 py-8">
             <div class="container flex justify-between mx-auto">
@@ -132,7 +132,14 @@ export default {
         ...mapActions({
             fetchPosts: "posts/fetchPosts",
             deletePost : "posts/deletePost"
-        })
+        }),
+        async postDelete() {
+            await this.deletePost();
+            await this.fetchPosts();
+            this.$store.commit("notification/showNotification", {
+                message : "Post deleted"
+            })
+        }
     },
 }
 </script>

@@ -41,6 +41,7 @@ export default {
     methods: {
         deleteObject() {
             this.$emit('delete');
+            this.$modal.hide("deleteConfirmationDialog");
         }
     }
 }

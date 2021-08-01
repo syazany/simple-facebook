@@ -27,8 +27,9 @@ const actions = {
         console.log({response});
         state.commit('SET_POSTS', response.data.data);
     },
-    async deletePost() {
-        const response = await re
+    async deletePost(state) {
+        console.log({state});
+        const response = await postRepository.delete(state.state.deletePostId);
     }
 }
 

@@ -10,6 +10,9 @@ export default {
         return axios.post(`/api/posts`, payload)
     },
     get(id) {
-        return axios.post(`/api/${id}`);
+        return axios.post(`/api/posts/${id}`);
+    },
+    delete(id) {
+        return axios.delete(`/api/posts/${id}`)
     }
 }
