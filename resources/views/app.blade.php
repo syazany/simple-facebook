@@ -25,10 +25,10 @@
     </style>
 </head>
 <body class="antialiased">
-<div  id="app" class="relative flex items-top justify-center min-h-screen sm:items-center ">
+<div  id="app" class="justify-center">
     <main>
         <toast-notification></toast-notification>
-        <div class="pt-16 flex">
+        <div class="pt-16">
             <router-view :key="$route.fullPath"></router-view>
         </div>
     </main>
