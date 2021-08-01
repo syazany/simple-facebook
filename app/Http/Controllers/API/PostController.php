@@ -13,8 +13,7 @@ class PostController extends Controller
 {
     public function index(Request $request)
     {
-        return PostIndexResource::collection($request->user()
-            ->posts()
+        return PostIndexResource::collection(Post::query()
             ->with(['user', 'likedByUser', 'comments.user'])
             ->withCount(['likes'])
             ->paginate());
@@ -37,6 +36,8 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
+        $post->comments()->delete();
+        $post->likes()->delete();
         $post->delete();
     }
 }

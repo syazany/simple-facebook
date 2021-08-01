@@ -1,17 +1,19 @@
 <template>
     <div>
         <div class="max-w-4xl px-10 py-6 mx-auto bg-white rounded-lg shadow-md">
-            <div><a href="#" class="flex items-center"><img
+            <div>
+                <a href="#" class="flex items-center"><img
              src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=731&amp;q=80"
              alt="avatar" class="hidden object-cover w-10 h-10 mx-4 rounded-full sm:block">
                 <h1 class="font-bold text-gray-700 hover:underline">{{ post.user.name }}</h1>
+                <post-popover :post="post"/>
             </a></div>
             <div class="mt-2">
                 <span v-html="post.content"></span></p>
             </div>
             <div class="flex items-center justify-between mt-4">
                 <a @click="showCommentTextField = !showCommentTextField" href="#"
-                   class="text-blue-500 hover:underline">Add commments</a>
+                   class="text-blue-500 hover:underline">Add comments ({{post.comments.length}} comments)</a>
                 <button
                  class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
@@ -74,9 +76,11 @@
 <script>
 import commentRepository from "../../repositories/commentRepository";
 import {mapActions} from "vuex";
+import PostPopover from "../../components/posts/PostPopover";
 
 export default {
     name: "Post",
+    components: {PostPopover},
     props: {
         post: {
             type: Object

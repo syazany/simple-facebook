@@ -29,6 +29,9 @@
             <create-post-dialog></create-post-dialog>
         </modal>
 
+        <delete-confirmation-dialog object-type="Post"
+                                    @delete="deletePost"></delete-confirmation-dialog>
+
         <div class="px-6 py-8">
             <div class="container flex justify-between mx-auto">
                 <div class="w-full lg:w-8/12">
@@ -127,7 +130,8 @@ export default {
     },
     methods: {
         ...mapActions({
-            fetchPosts: "posts/fetchPosts"
+            fetchPosts: "posts/fetchPosts",
+            deletePost : "posts/deletePost"
         })
     },
 }

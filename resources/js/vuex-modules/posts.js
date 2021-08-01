@@ -2,21 +2,23 @@ import postRepository from "../repositories/postRepository";
 
 const state = () => ({
     posts : [],
-    dismissable: true
+    deletePostId : null
 });
 
 // getters
 const getters = {
-    posts: (state) => {
-        return state.posts;
-    },
+    posts: (state) => state.posts,
+    deletePostId : (state) => state.deletePostId
 };
 
 // mutations
 const mutations = {
     SET_POSTS : (state, payload) => {
         state.posts = payload;
-    }
+    },
+    SET_POST_DELETE_ID : (state, payload) => {
+        state.deletePostId = payload;
+    },
 };
 
 const actions = {
@@ -25,6 +27,9 @@ const actions = {
         console.log({response});
         state.commit('SET_POSTS', response.data.data);
     },
+    async deletePost() {
+        const response = await re
+    }
 }
 
 export default {
