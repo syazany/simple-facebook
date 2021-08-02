@@ -16,7 +16,7 @@ class PostController extends Controller
         return PostIndexResource::collection(Post::query()
             ->with(['user', 'likedByUser', 'comments.user'])
             ->withCount(['likes'])
-            ->paginate());
+            ->paginate(5));
     }
 
     public function store(PostCreateRequest $request)

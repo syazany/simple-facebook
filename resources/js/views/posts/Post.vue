@@ -10,7 +10,7 @@
                 <post-popover :post="post"/>
             </div>
             <div class="mt-2">
-                <span v-html="post.content"></span></p>
+                <span v-html="post.content"></span>
             </div>
             <div class="flex items-center justify-between mt-4">
                 <a @click="showCommentTextField = !showCommentTextField" href="#"
@@ -116,8 +116,7 @@ export default {
                 message : "Comment added"
             })
 
-        },
-        deleteComment(id) {
+            this.showCommentTextField = false;
 
         },
         async likePost() {

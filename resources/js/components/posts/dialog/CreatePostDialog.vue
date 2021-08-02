@@ -2,7 +2,7 @@
     <div class="container md:mx-auto sm:w-full py-2 overflow-y-auto">
 
         <div class="py-4">
-            <span class="default-dialog-title">New Post</span>
+            <span class="default-dialog-title">{{ edit ? 'Update' : 'Add' }} Post</span>
         </div>
 
         <hr>
@@ -11,7 +11,7 @@
 
             <quill-editor id="description"
                           height="200"
-                          v-model="post"
+                          v-model="content"
                           :options="editorOptions"
                           class="primary-rich-text">
             </quill-editor>
@@ -22,7 +22,7 @@
                 </button>
                 <div class="divider"></div>
                 <button @click="createPost" class="btn btn-primary">
-                    <span>Create</span>
+                    <span>{{ edit ? 'Update' : 'Create' }}</span>
                 </button>
             </div>
         </div>
@@ -38,7 +38,7 @@ import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 import {quillEditor} from 'vue-quill-editor'
 import postRepository from "../../../repositories/postRepository";
-import {mapActions} from "vuex";
+import {mapActions, mapGetters, mapMutations} from "vuex";
 
 export default {
     name: "CreatePostDialog",
@@ -49,19 +49,48 @@ export default {
     data() {
         return {
             editorOptions,
-            post: ""
+        }
+    },
+    computed: {
+        ...mapGetters({
+            editPostId: "posts/editPostId",
+            postContent : "posts/content",
+        }),
+        edit() {
+            return this.editPostId !== null;
+        },
+        content : {
+            get() {
+                return this.postContent
+            },
+            set(e) {
+                return this.setContent(e);
+            }
         }
     },
     methods: {
         ...mapActions({
-           fetchPosts : "posts/fetchPosts"
+            fetchPosts: "posts/fetchPosts"
+        }),
+        ...mapMutations({
+           setContent : "posts/SET_CONTENT",
+           resetContent : "posts/RESET_CONTENT"
         }),
         async createPost() {
-            await postRepository.store({content : this.post});
+            this.edit ?
+             await postRepository.update(this.editPostId, {
+                 content: this.content
+             }) :
+             await postRepository.store({content: this.content});
+
             this.$store.commit("notification/showNotification", {
-                message : "Post created"
+                message: "Post "  + (this.edit ? "updated" : "created")
             })
+
+            this.resetContent();
+
             await this.fetchPosts();
+
             this.$modal.hide("create_post_dialog");
         }
     }

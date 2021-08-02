@@ -23,6 +23,10 @@
                         <div class="rounded-md bg-white bg-opacity-0 shadow-xs">
                             <div class="py-1" role="menu" aria-orientation="vertical"
                                  aria-labelledby="options-menu">
+                                <a @click.stop="updatePost"
+                                   class="block cursor-pointer font-medium px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100
+                                           hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900 bg-opacity-0"
+                                   role="menuitem">Edit</a>
                                 <a
                                  @click.stop="setId(); $modal.show('deleteConfirmationDialog');"
                                  href="#"
@@ -38,9 +42,10 @@
         </div>
     </div>
 </template>
-</div>
 
 <script>
+import {mapMutations} from "vuex";
+
 export default {
     name: "PostPopover",
     props: {
@@ -55,12 +60,22 @@ export default {
         }
     },
     methods: {
+        ...mapMutations({
+            setEditPostId: "posts/SET_EDIT_POST_ID",
+            setContent: "posts/SET_CONTENT",
+        }),
         setId() {
             this.$store.commit("posts/SET_POST_DELETE_ID", this.post.id)
         },
         closeDropdown() {
             this.isOpen = !this.isOpen;
-        }
+        },
+        updatePost() {
+            this.isOpen = false;
+            this.setEditPostId(this.post.id);
+            this.setContent(this.post.content);
+            this.$modal.show("create_post_dialog");
+        },
     }
 }
 </script>
