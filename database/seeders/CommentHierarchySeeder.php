@@ -14,10 +14,21 @@ class CommentHierarchySeeder extends Seeder
      */
     public function run()
     {
-        for($i = 0; $i < 5; $i++) {
-            foreach(Comment::all() as $comment) {
-                Comment::factory()->create(['commentable_type' => get_class(new Comment()), 'commentable_id' => $comment->id]);
+
+        for($j = 0; $j < 20 ; $j++) {
+
+            $comment = Comment::factory()->create();
+            $comment2 = Comment::factory()
+                ->create(['commentable_type' => get_class(new Comment()), 'commentable_id' => $comment->id]);
+
+            for ($i = 0; $i < 5; $i++) {
+                $comment2 = Comment::factory()
+                    ->create(['commentable_type' => get_class(new Comment()), 'commentable_id' => $comment2->id]);
             }
         }
+
+        Comment::has('descendants')
+            ->with(['descendants'])
+            ->get();
     }
 }
