@@ -6,9 +6,11 @@ use App\Traits\HasComments;
 use App\Traits\HasUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
 class Comment extends Model
 {
+    use HasRecursiveRelationships;
     use HasFactory;
     use HasUser;
     use HasComments;
@@ -18,5 +20,10 @@ class Comment extends Model
     public function commentable()
     {
         return $this->morphTo();
+    }
+
+    public function getParentKeyName()
+    {
+        return 'commentable_id';
     }
 }
