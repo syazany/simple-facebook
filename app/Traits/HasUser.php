@@ -11,7 +11,8 @@ trait HasUser
     public static function bootHasUser()
     {
         static::creating(function ($model) {
-           $model->user_id = auth()->user()->id;
+            if (auth()->user() === null) return;
+            $model->user_id = auth()->user()->id;
         });
     }
 

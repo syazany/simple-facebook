@@ -14,7 +14,7 @@ class PostController extends Controller
     public function index(Request $request)
     {
         return PostIndexResource::collection(Post::query()
-            ->with(['user', 'likedByUser', 'comments.user'])
+            ->with(['user', 'likedByUser','comments.user'])
             ->withCount(['likes'])
             ->paginate(5));
     }

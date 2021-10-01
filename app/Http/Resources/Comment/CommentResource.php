@@ -17,7 +17,7 @@ class CommentResource extends JsonResource
         return array_merge(parent::toArray($request), [
             'meta' => [
                 'permissions' => [
-                    'delete' => auth()->user()->id === $this->user_id
+                    'delete' => optional(auth()->user())->id === $this->user_id
                 ]
             ],
         ]);
