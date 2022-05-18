@@ -1,7 +1,5 @@
 
-## Newsoft test
-
-Completed the task given except using JWT as authentication fully. I'm using Laravel Breeze to authenticate using session and the API authentication is using Laravel passport (by using the middleware \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class,)
+## Simple mini social media as case study 
 
 - User can register and login
 - User can create and edit post
